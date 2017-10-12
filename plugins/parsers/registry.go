@@ -152,9 +152,8 @@ func NewMsgpackParser(
 	metricName string,
 	defaultTags map[string]string,
 ) (Parser, error) {
-	parser := &msgpack.MsgpackParser{
+	return &msgpack.MsgpackParser{
 		MetricName:  metricName,
 		DefaultTags: defaultTags,
-	}
-	return parser, nil
+	}, nil
 }
