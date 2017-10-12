@@ -11,6 +11,7 @@ import (
 	"github.com/masami10/telegraf/plugins/parsers/json"
 	"github.com/masami10/telegraf/plugins/parsers/nagios"
 	"github.com/masami10/telegraf/plugins/parsers/value"
+	"github.com/masami10/telegraf/plugins/parsers/msgpack"
 )
 
 // ParserInput is an interface for input plugins that are able to parse
@@ -89,6 +90,9 @@ func NewParser(config *Config) (Parser, error) {
 	case "collectd":
 		parser, err = NewCollectdParser(config.CollectdAuthFile,
 			config.CollectdSecurityLevel, config.CollectdTypesDB)
+	case "msgpack":
+		parser, err = NewMsgpackParser(config.MetricName,
+			config.DefaultTags)
 	default:
 		err = fmt.Errorf("Invalid data format: %s", config.DataFormat)
 	}
@@ -142,4 +146,15 @@ func NewCollectdParser(
 	typesDB []string,
 ) (Parser, error) {
 	return collectd.NewCollectdParser(authFile, securityLevel, typesDB)
+}
+
+func NewMsgpackParser(
+	metricName string,
+	defaultTags map[string]string,
+) (Parser, error) {
+	parser := &msgpack.MsgpackParser{
+		MetricName:  metricName,
+		DefaultTags: defaultTags,
+	}
+	return parser, nil
 }
