@@ -16,6 +16,7 @@ import (
 	_ "github.com/masami10/telegraf/plugins/outputs/kinesis"
 	_ "github.com/masami10/telegraf/plugins/outputs/librato"
 	_ "github.com/masami10/telegraf/plugins/outputs/mqtt"
+	_ "github.com/masami10/telegraf/plugins/outputs/mqtt_flatten"
 	_ "github.com/masami10/telegraf/plugins/outputs/nats"
 	_ "github.com/masami10/telegraf/plugins/outputs/nsq"
 	_ "github.com/masami10/telegraf/plugins/outputs/opentsdb"

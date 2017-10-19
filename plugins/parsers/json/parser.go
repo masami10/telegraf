@@ -127,11 +127,11 @@ func (f *JSONFlattener) FullFlattenJSON(
 	if f.Fields == nil {
 		f.Fields = make(map[string]interface{})
 	}
-	fieldname = strings.Trim(fieldname, "_")
+	fieldname = strings.Trim(fieldname, "/")
 	switch t := v.(type) {
 	case map[string]interface{}:
 		for k, v := range t {
-			err := f.FullFlattenJSON(fieldname+"_"+k+"_", v, convertString, convertBool)
+			err := f.FullFlattenJSON(fieldname+"/"+k+"/", v, convertString, convertBool)
 			if err != nil {
 				return err
 			}
@@ -139,7 +139,7 @@ func (f *JSONFlattener) FullFlattenJSON(
 	case []interface{}:
 		for i, v := range t {
 			k := strconv.Itoa(i)
-			err := f.FullFlattenJSON(fieldname+"_"+k+"_", v, convertString, convertBool)
+			err := f.FullFlattenJSON(fieldname+"/"+k+"/", v, convertString, convertBool)
 			if err != nil {
 				return nil
 			}
