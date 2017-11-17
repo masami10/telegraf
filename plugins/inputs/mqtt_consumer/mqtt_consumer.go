@@ -34,6 +34,8 @@ type MQTTConsumer struct {
 	PersistentSession bool
 	ClientID          string `toml:"client_id"`
 
+	NameWithTopic	bool `toml:"nameoverrite_with_topic"`
+
 	// Path to CA file
 	SSLCA string `toml:"ssl_ca"`
 	// Path to host cert file
@@ -68,6 +70,9 @@ var sampleConfig = `
     "telegraf/+/mem",
     "sensors/#",
   ]
+
+  ## 根据mqtt收到的topic创建measurement
+  nameoverrite_with_topic = true
 
   # if true, messages that can't be delivered while the subscriber is offline
   # will be delivered when it comes back (such as on service restart).
@@ -193,7 +198,11 @@ func (m *MQTTConsumer) receiver() {
 			for _, metric := range metrics {
 				tags := metric.Tags()
 				tags["topic"] = topic
-				m.acc.AddFields(metric.Name(), metric.Fields(), tags, metric.Time())
+				if m.NameWithTopic {
+					m.acc.AddFields(topic, metric.Fields(), tags, metric.Time())
+				}else{
+					m.acc.AddFields(metric.Name(), metric.Fields(), tags, metric.Time())
+				}
 			}
 		}
 	}
