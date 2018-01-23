@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/eclipse/paho.mqtt.golang"
+	"github.com/masami10/paho.mqtt.golang"
 )
 
 const (

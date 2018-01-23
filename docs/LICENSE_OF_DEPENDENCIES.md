@@ -23,7 +23,7 @@ following works:
 - github.com/eapache/go-resiliency [MIT](https://github.com/eapache/go-resiliency/blob/master/LICENSE)
 - github.com/eapache/go-xerial-snappy [MIT](https://github.com/eapache/go-xerial-snappy/blob/master/LICENSE)
 - github.com/eapache/queue [MIT](https://github.com/eapache/queue/blob/master/LICENSE)
-- github.com/eclipse/paho.mqtt.golang [ECLIPSE](https://github.com/eclipse/paho.mqtt.golang/blob/master/LICENSE)
+- github.com/masami10/paho.mqtt.golang [ECLIPSE](https://github.com/masami10/paho.mqtt.golang/blob/master/LICENSE)
 - github.com/fsouza/go-dockerclient [BSD](https://github.com/fsouza/go-dockerclient/blob/master/LICENSE)
 - github.com/gobwas/glob [MIT](https://github.com/gobwas/glob/blob/master/LICENSE)
 - github.com/google/go-cmp [BSD](https://github.com/google/go-cmp/blob/master/LICENSE)

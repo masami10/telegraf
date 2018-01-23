@@ -12,7 +12,7 @@ import (
 	"github.com/masami10/telegraf/plugins/inputs"
 	"github.com/masami10/telegraf/plugins/parsers"
 
-	"github.com/eclipse/paho.mqtt.golang"
+	"github.com/masami10/paho.mqtt.golang"
 )
 
 // 30 Seconds is the default used by paho.mqtt.golang

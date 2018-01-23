@@ -10,7 +10,7 @@ import (
 	"github.com/masami10/telegraf/plugins/outputs"
 	"github.com/masami10/telegraf/plugins/serializers"
 
-	paho "github.com/eclipse/paho.mqtt.golang"
+	paho "github.com/masami10/paho.mqtt.golang"
 )
 
 var sampleConfig = `
