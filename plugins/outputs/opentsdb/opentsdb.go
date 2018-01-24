@@ -22,18 +22,9 @@ var (
 		`%`, "-",
 		"#", "-",
 		"$", "-")
-)
-
-var (
-	allowedChars = regexp.MustCompile(`[^a-zA-Z0-9-_./\p{L}]`)
-	hypenChars   = strings.NewReplacer(
-		"@", "-",
-		"*", "-",
-		`%`, "-",
-		"#", "-",
-		"$", "-")
 	defaultSeperator = "_"
 )
+
 
 type OpenTSDB struct {
 	Prefix string
