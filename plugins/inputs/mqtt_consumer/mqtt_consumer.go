@@ -58,7 +58,10 @@ type MQTTConsumer struct {
 }
 
 var sampleConfig = `
-  servers = ["localhost:1883"]
+  ## MQTT broker URLs to be used. The format should be scheme://host:port,
+  ## schema can be tcp, ssl, or ws.
+  servers = ["tcp://localhost:1883"]
+
   ## MQTT QoS, must be 0, 1, or 2
   qos = 0
   ## Connection timeout for initial connection in seconds
@@ -72,7 +75,7 @@ var sampleConfig = `
   ]
 
   ## 根据mqtt收到的topic创建measurement
-  nameoverrite_with_topic = true
+  nameoverrite_with_topic = false
 
   # if true, messages that can't be delivered while the subscriber is offline
   # will be delivered when it comes back (such as on service restart).
@@ -248,9 +251,7 @@ func (m *MQTTConsumer) createOpts() (*mqtt.ClientOptions, error) {
 		return nil, err
 	}
 
-	scheme := "tcp"
 	if tlsCfg != nil {
-		scheme = "ssl"
 		opts.SetTLSConfig(tlsCfg)
 	}
 
@@ -266,8 +267,17 @@ func (m *MQTTConsumer) createOpts() (*mqtt.ClientOptions, error) {
 	if len(m.Servers) == 0 {
 		return opts, fmt.Errorf("could not get host infomations")
 	}
-	for _, host := range m.Servers {
-		server := fmt.Sprintf("%s://%s", scheme, host)
+
+	for _, server := range m.Servers {
+		// Preserve support for host:port style servers; deprecated in Telegraf 1.4.4
+		if !strings.Contains(server, "://") {
+			log.Printf("W! mqtt_consumer server %q should be updated to use `scheme://host:port` format", server)
+			if tlsCfg == nil {
+				server = "tcp://" + server
+			} else {
+				server = "ssl://" + server
+			}
+		}
 
 		opts.AddBroker(server)
 	}
