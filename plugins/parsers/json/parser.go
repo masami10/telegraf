@@ -114,7 +114,7 @@ func (f *JSONFlattener) FlattenJSON(
 	if f.Fields == nil {
 		f.Fields = make(map[string]interface{})
 	}
-	return f.FullFlattenJSON(fieldname, v, true, false)
+	return f.FullFlattenJSON(fieldname, v, true, true)
 }
 
 // FullFlattenJSON flattens nested maps/interfaces into a fields map (including bools and string)
